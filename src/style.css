@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-paper: #f5f3eb;
+  --color-raised: #fbfaf6;
+  --color-ink: #1c1b16;
+  --color-ink-soft: #4a473d;
+  --color-stone: #7b766a;
+  --color-line: #dcd8c8;
+  --color-brand: #0f5e43;
+  --color-brand-deep: #0a4430;
+  --color-brand-soft: #e3ede7;
+  --color-gold: #b8801f;
+  --color-gold-soft: #f3e6cc;
+  --color-brick: #a14634;
+
+  --animate-rise: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+  ::selection {
+    @apply bg-brand text-white;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* soft emerald glow + fine dot grid that fades out downward */
+  .hero-backdrop {
+    background-image:
+      radial-gradient(48rem 26rem at 85% -5%, rgb(15 94 67 / 0.14), transparent 70%),
+      radial-gradient(30rem 20rem at 0% 30%, rgb(184 128 31 / 0.08), transparent 70%),
+      radial-gradient(circle, rgb(28 27 22 / 0.09) 1px, transparent 1.2px);
+    background-size: auto, auto, 24px 24px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent);
+  }
+  .cta-backdrop {
+    background-image:
+      radial-gradient(34rem 18rem at 100% 0%, rgb(184 128 31 / 0.35), transparent 70%),
+      radial-gradient(28rem 16rem at 0% 100%, rgb(255 255 255 / 0.08), transparent 70%),
+      radial-gradient(circle, rgb(255 255 255 / 0.08) 1px, transparent 1.2px);
+    background-size: auto, auto, 22px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
